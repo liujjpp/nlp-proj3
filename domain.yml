@@ -3,6 +3,7 @@ intents:
   - goodbye
   - affirm
   - deny
+  - gratitude
   - recipe_search
   - recipe_lookup
   - display_ingredients
@@ -18,6 +19,7 @@ entities:
   - guide_action
   - number
   - cook_action
+  - food
 
 responses:
   utter_greet:
@@ -27,31 +29,40 @@ responses:
   - text: "Bye"
 
   utter_search:
-  - text: "search"
+  - text: "Sure. Please specify a URL."
 
   utter_lookup:
-  - text: "lookup"
+  - text: "Alright. So let's start working with \"Classic and Simple Meat Lasagna.\" What do you want to do?"
+
+  utter_question:
+  - text: "What do you want to do?"
+
+  utter_commands:
+  - text: "[1] Go over ingredients list or [2] Go over recipe steps."
+
+  utter_continue:
+  - text: "Should I continue to the 2nd step?"
 
   utter_display_ingredients:
-  - text: "display_ingredients"
+  - text: "Here are the ingredients for \"Classic and Simple Meat Lasagna\":\n\n12 whole wheat lasagna noodles\n\n1 pound lean ground beef\n\n(...)\n\n1 1/2 25 ounce jars tomato-basil pasta sauce\n\n2 cups mozzarella cheese, shredded"
 
   utter_read_recipe:
-  - text: "read_recipe"
+  - text: "The 1st step is: Preheat oven to 350 degrees F (175 degrees C)."
 
   utter_prev:
-  - text: "prev"
+  - text: "Going to previous step: STUFF"
 
   utter_next:
-  - text: "next"
+  - text: "Going to next step: STUFF"
 
   utter_index:
-  - text: "index"
+  - text: "Going to nth step: STUFF"
 
   utter_how:
-  - text: "how"
+  - text: "No worries. I found a reference for you: https://www.youtube.com/results?search_query=how+to+preheat+oven"
 
   utter_what:
-  - text: "what"
+  - text: "No worries. I found a reference for you: https://www.google.com/search?q=what+is+a+pan"
 
 session_config:
   session_expiration_time: 60

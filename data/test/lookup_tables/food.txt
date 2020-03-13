@@ -1,0 +1,9 @@
+fish
+cake
+dough
+noodle
+sauce
+oven
+pot
+wok
+pan

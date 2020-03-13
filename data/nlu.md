@@ -15,6 +15,7 @@
 
 ## intent:affirm
 - yes
+- yes, please
 - indeed
 - of course
 - that sounds good
@@ -28,12 +29,20 @@
 - no way
 - not really
 
+## intent:gratitude
+- thanks
+- thanks again
+- many thanks
+- thank you
+- appreciate it
+- love it
+
 ## lookup:guide_action
 data/test/lookup_tables/guide_action.txt
 
 ## intent:recipe_search
-- [walk me through](guide_action) a recipe from
-- [walk me through](guide_action) recipe from
+- [walk me through](guide_action) a recipe from AllRecipes.com
+- [walk me through](guide_action) recipe from AllRecipes.com
 
 ## regex:recipe_lookup
 - ^http
@@ -96,19 +105,26 @@ data/test/lookup_tables/count.txt
 
 ## regex:how_question
 - how[^\\s]*
+- how is[^\\s]*
 
-## lookup:count
+## lookup:cook_action
 data/test/lookup_tables/cook_action.txt
 
 ## intent:how_question
 - how to
 - how do i
 - how do i [preheat](cook_action)
+- how do i [preheat](cook_action) a [fish](food)
+- how do i [preheat](cook_action) [pasta](food)
 - how does
 - how does the
 
+## lookup:food
+data/test/lookup_tables/food.txt
+
 ## regex:what_question
 - what[^\\s]*
+- what is[^\\s]*
 
 ## intent:what_question
 - what is

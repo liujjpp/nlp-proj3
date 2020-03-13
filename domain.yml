@@ -3,29 +3,55 @@ intents:
   - goodbye
   - affirm
   - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
+  - recipe_search
+  - recipe_lookup
+  - display_ingredients
+  - read_recipe
+  - prev_step
+  - next_step
+  - index_step
+  - how_question
+  - what_question
+
+entities:
+  - count
+  - guide_action
+  - number
+  - cook_action
 
 responses:
   utter_greet:
   - text: "Hey! How are you?"
 
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
-
   utter_goodbye:
   - text: "Bye"
 
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  utter_search:
+  - text: "search"
+
+  utter_lookup:
+  - text: "lookup"
+
+  utter_display_ingredients:
+  - text: "display_ingredients"
+
+  utter_read_recipe:
+  - text: "read_recipe"
+
+  utter_prev:
+  - text: "prev"
+
+  utter_next:
+  - text: "next"
+
+  utter_index:
+  - text: "index"
+
+  utter_how:
+  - text: "how"
+
+  utter_what:
+  - text: "what"
 
 session_config:
   session_expiration_time: 60

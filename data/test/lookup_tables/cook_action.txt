@@ -1,0 +1,7 @@
+preheat
+bake
+cook
+fry
+steam
+saute
+stir

@@ -5,7 +5,7 @@ Group Members: Jiapeng Liu, Ka Wong, Tomi Inouye
 
 GitHub repository: https://github.com/liujjpp/nlp-proj3
 
-Rasa is used in this project, therefore, the module `uvloop` is needed. `uvloop` is only supported on Linux or Mac machines, so please install the project one of the so said machines to be able to install all dependencies.
+Rasa is used in this project, therefore, the module `uvloop` is needed. `uvloop` is only supported on Linux or Mac machines, so please install the project one of the so said machines to be able to install all dependencies. The alternative is to run a linux system on a virtual machine to install this project.
 
 ## Directions for setup:
 

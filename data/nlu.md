@@ -6,6 +6,7 @@
 - good afternoon
 - good evening
 - hey there
+- what's up
 
 ## intent:goodbye
 - bye

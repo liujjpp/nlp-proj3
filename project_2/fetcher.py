@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 from pprint import pprint
 
-from transforms import to_thai_cuisine
+from project_2.transforms import to_thai_cuisine
 
 class RecipeFetcher:
 
@@ -25,7 +25,11 @@ class RecipeFetcher:
         results = {}
 
         page_html = requests.get(recipe_url)
-        page_graph = BeautifulSoup(page_html.content)
+        page_graph = BeautifulSoup(page_html.content, features="html.parser")
+
+        results['title'] = page_graph.select('#recipe-main-content')[0].string
+        if not results['title']:
+          results['title'] = page_graph.title.string
 
         results['ingredients'] = [ingredient.text for ingredient in\
                                   page_graph.find_all('span', {'itemprop':'recipeIngredient'})]
@@ -44,7 +48,7 @@ class RecipeFetcher:
         nutrition_facts_url = '%s/fullrecipenutrition' % (recipe_url)
 
         page_html = requests.get(nutrition_facts_url)
-        page_graph = BeautifulSoup(page_html.content)
+        page_graph = BeautifulSoup(page_html.content, features="html.parser")
 
         for nutrient_row in page_graph.find_all('div', {'class':'nutrition-row'}):
             nutrient = {}

@@ -21,6 +21,25 @@ entities:
   - cook_action
   - food
 
+actions:
+  - action_lookup_recipe
+  - action_read_recipe
+  - action_read_next_step
+
+slots:
+  recipe:
+    type: unfeaturized
+    initial_value: {}
+  current_step:
+    type: float
+    initial_value: 0
+  number:
+    type: text
+    initial_value: ""
+  count:
+    type: text
+    initial_value: ""
+
 responses:
   utter_greet:
   - text: "Hey! How are you?"

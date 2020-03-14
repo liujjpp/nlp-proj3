@@ -2,7 +2,7 @@
 * recipe_search
   - utter_search
 * recipe_lookup
-  - utter_lookup
+  - action_lookup_recipe
   - utter_commands
 > check_selected_command
 
@@ -30,7 +30,7 @@
 ## read recipe
 > check_selected_command
 * read_recipe
-  - utter_read_recipe
+  - action_read_recipe
 > check_selected_command
 > change_step
 
@@ -43,7 +43,7 @@
 ## next step
 > change_step
 * next_step
-  - utter_next
+  - action_read_next_step
 > change_step
   
 ## index step

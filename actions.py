@@ -7,21 +7,86 @@
 
 # This is a simple example for a custom action which utters "Hello World!"
 
+from project_2.fetcher import RecipeFetcher
+
 from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import SlotSet
 
+str_number_lookup = {
+    1: "1st",
+    2: "2nd",
+    3: "3rd"
+}
 
-class ActionHelloWorld(Action):
+def translate_number(num):
+    if num < 4:
+        return str_number_lookup[num]
+    else:
+        return str(num) + "th"
 
+class ActionLookupRecipe(Action):
     def name(self) -> Text:
-        return "action_hello_world"
+        return "action_lookup_recipe"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # print('tracker state', tracker.current_slot_values())
 
-        dispatcher.utter_message(text="Hello World!")
+        try:
+            # clean url
+            inputUrl = tracker.latest_message['text'].strip()
 
-        return []
+            # fetch recipe from website
+            rf = RecipeFetcher()
+            recipe = rf.scrape_recipe(inputUrl)
+            message = "Alright. So let's start working with \"" + recipe['title'] + "\". What do you want to do?"
+
+            dispatcher.utter_message(text=message)
+            return [SlotSet("recipe", recipe)]
+
+        except:
+            dispatcher.utter_message(text="Url failed. Please try another recipe url.")
+            return []
+
+class ActionReadRecipe(Action):
+    def name(self) -> Text:
+        return "action_read_recipe"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        slots = tracker.current_slot_values()
+        if 'recipe' not in slots:
+            dispatcher.utter_message(text="Please input a valid recipe url before going over recipe steps.")
+            return []
+        steps = slots['recipe']['directions']
+        idx = 0
+        dispatcher.utter_message(text="The 1st step is: " + steps[idx])
+        return [SlotSet("current_step", idx)]
+
+class ActionReadNextStep(Action):
+    def name(self) -> Text:
+        return "action_read_next_step"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        print(tracker.latest_message)
+        print(tracker.current_slot_values())
+
+        slots = tracker.current_slot_values()
+        if 'recipe' not in slots:
+            dispatcher.utter_message(text="Please input a valid recipe url before going over recipe steps.")
+            return []
+        steps = slots['recipe']['directions']
+        idx = slots['current_step'] + 1
+        if idx >= len(steps):
+            dispatcher.utter_message(text="Last step has been reached. Resetting back to beginning step if asked again.")
+            return [SlotSet("current_step", 0)]
+        else:
+            dispatcher.utter_message(text="The " + translate_number(idx+1) + " step is: " + steps[idx])
+            return [SlotSet("current_step", idx)]

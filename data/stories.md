@@ -36,13 +36,13 @@
 
 ## prev step
 > change_step
-* prev_step
-  - utter_prev
+* prev_step{"number": "one"}
+  - action_read_prev_step
 > change_step
   
 ## next step
 > change_step
-* next_step
+* next_step{"number": "one"}
   - action_read_next_step
 > change_step
   

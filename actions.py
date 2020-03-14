@@ -60,7 +60,7 @@ class ActionReadRecipe(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         slots = tracker.current_slot_values()
-        if 'recipe' not in slots:
+        if not slots['recipe']:
             dispatcher.utter_message(text="Please input a valid recipe url before going over recipe steps.")
             return []
         steps = slots['recipe']['directions']
@@ -75,18 +75,37 @@ class ActionReadNextStep(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print(tracker.latest_message)
-        print(tracker.current_slot_values())
 
         slots = tracker.current_slot_values()
-        if 'recipe' not in slots:
+        if not slots['recipe']:
             dispatcher.utter_message(text="Please input a valid recipe url before going over recipe steps.")
             return []
         steps = slots['recipe']['directions']
         idx = slots['current_step'] + 1
         if idx >= len(steps):
             dispatcher.utter_message(text="Last step has been reached. Resetting back to beginning step if asked again.")
-            return [SlotSet("current_step", 0)]
+            return [SlotSet("current_step", -1)]
+        else:
+            dispatcher.utter_message(text="The " + translate_number(idx+1) + " step is: " + steps[idx])
+            return [SlotSet("current_step", idx)]
+
+class ActionReadPrevStep(Action):
+    def name(self) -> Text:
+        return "action_read_prev_step"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        slots = tracker.current_slot_values()
+        if not slots['recipe']:
+            dispatcher.utter_message(text="Please input a valid recipe url before going over recipe steps.")
+            return []
+        steps = slots['recipe']['directions']
+        idx = slots['current_step'] - 1
+        if idx < 0:
+            dispatcher.utter_message(text="First step has been reached. Cannot go further backwards.")
+            return []
         else:
             dispatcher.utter_message(text="The " + translate_number(idx+1) + " step is: " + steps[idx])
             return [SlotSet("current_step", idx)]

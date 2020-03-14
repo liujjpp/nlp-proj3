@@ -24,6 +24,7 @@ entities:
 actions:
   - action_lookup_recipe
   - action_read_recipe
+  - action_display_ingredients
   - action_read_next_step
   - action_read_prev_step
 
@@ -43,16 +44,13 @@ slots:
 
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
+  - text: "Hey! I am the General Recipe bot!"
 
   utter_goodbye:
   - text: "Bye"
 
   utter_search:
   - text: "Sure. Please specify a URL."
-
-  utter_lookup:
-  - text: "Alright. So let's start working with \"Classic and Simple Meat Lasagna.\" What do you want to do?"
 
   utter_question:
   - text: "What do you want to do?"
@@ -62,18 +60,6 @@ responses:
 
   utter_continue:
   - text: "Should I continue to the 2nd step?"
-
-  utter_display_ingredients:
-  - text: "Here are the ingredients for \"Classic and Simple Meat Lasagna\":\n\n12 whole wheat lasagna noodles\n\n1 pound lean ground beef\n\n(...)\n\n1 1/2 25 ounce jars tomato-basil pasta sauce\n\n2 cups mozzarella cheese, shredded"
-
-  utter_read_recipe:
-  - text: "The 1st step is: Preheat oven to 350 degrees F (175 degrees C)."
-
-  utter_prev:
-  - text: "Going to previous step: STUFF"
-
-  utter_next:
-  - text: "Going to next step: STUFF"
 
   utter_index:
   - text: "Going to nth step: STUFF"

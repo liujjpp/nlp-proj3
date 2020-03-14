@@ -68,6 +68,24 @@ class ActionReadRecipe(Action):
         dispatcher.utter_message(text="The 1st step is: " + steps[idx])
         return [SlotSet("current_step", idx)]
 
+class ActionDisplayIngredients(Action):
+    def name(self) -> Text:
+        return "action_display_ingredients"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        slots = tracker.current_slot_values()
+        if not slots['recipe']:
+            dispatcher.utter_message(text="Please input a valid recipe url before going over ingredients.")
+            return []
+        ingredients = slots['recipe']['ingredients']
+        # transform ingredients dict to string
+        ingredients_str = '\n\n'.join(ingredients)
+        dispatcher.utter_message(text="Here are the ingredients for \"" + slots['recipe']['title'] + "\":\n\n" + ingredients_str)
+        return []
+
 class ActionReadNextStep(Action):
     def name(self) -> Text:
         return "action_read_next_step"

@@ -10,7 +10,7 @@
 * gratitude
   - utter_continue
 * affirm
-  - utter_next
+  - action_read_next_step
 > change_step
 
 ## thanking path 2
@@ -24,7 +24,7 @@
 ## display ingredients
 > check_selected_command
 * display_ingredients
-  - utter_display_ingredients
+  - action_display_ingredients
 > check_selected_command
 
 ## read recipe

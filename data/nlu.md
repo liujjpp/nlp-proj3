@@ -65,6 +65,9 @@ data/test/lookup_tables/guide_action.txt
 ## intent:display_ingredients
 - 1
 - 1.
+- Show me the ingredients list
+- [walk me through](guide_action) the ingredients list
+- [walk me through](guide_action) ingredients list
 - [walk me through](guide_action) the ingredients
 - [walk me through](guide_action) ingredients
 
@@ -75,6 +78,9 @@ data/test/lookup_tables/guide_action.txt
 ## intent:read_recipe
 - 2
 - 2.
+- Show me the recipe steps
+- [walk me through](guide_action) the recipe steps
+- [walk me through](guide_action) recipe steps
 - [walk me through](guide_action) the recipe
 - [walk me through](guide_action) recipe
 

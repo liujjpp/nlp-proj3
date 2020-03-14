@@ -9,6 +9,6 @@ services:
     command:
       - run
   action_server:
-    image: rasa/rasa-sdk:latest
+    image: htmercury/nlp-rasa
     volumes:
       - ./actions:/app/actions

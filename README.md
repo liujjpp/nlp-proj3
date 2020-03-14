@@ -35,3 +35,5 @@ $ pip install -r requirements.txt
 ```
 ### Running the project
 To start chatting with the rasa bot, run `rasa shell`, otherwise to retrain the rasa bot using modified data from `/data/*`, run `rasa train`.
+
+Keep in mind to also run `rasa run actions` in a separate tab within your virtualenv so the custom actions for retrieving the recipe and parsing entities from user messages for custom responses are active. The command creates a webserver on port `5055` and listens for calls to `/webhook` by the bot to perform the custom actions.

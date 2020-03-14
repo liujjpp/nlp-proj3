@@ -15,6 +15,8 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 
+from urllib import parse
+
 str_number_lookup = {
     1: "1st",
     2: "2nd",
@@ -187,3 +189,33 @@ class ActionReadNthStep(Action):
         except:
             dispatcher.utter_message(text="The nth step is out of range for this recipe. The recipe has a maximum of " + str(len(slots['recipe']['directions'])) + " steps.")
             return []
+
+class ActionAnswerWhat(Action):
+    def name(self) -> Text:
+        return "action_answer_what"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        slots = tracker.current_slot_values()
+        message = tracker.latest_message['text'].lower()
+        base_url = 'https://www.google.com/search?'
+        params = parse.urlencode({'q': message})
+
+        dispatcher.utter_message(text="No worries. I found a reference for you: " + base_url + params)
+        return []
+
+class ActionAnswerHow(Action):
+    def name(self) -> Text:
+        return "action_answer_how"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        slots = tracker.current_slot_values()
+        message = tracker.latest_message['text'].lower()
+        base_url = 'https://www.youtube.com/results?'
+        params = parse.urlencode({'search_query': message})
+
+        dispatcher.utter_message(text="No worries. I found a reference for you: " + base_url + params)
+        return []

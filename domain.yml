@@ -29,6 +29,8 @@ actions:
   - action_read_prev_step
   - action_read_nth_step
   - action_ask_continue
+  - action_answer_what
+  - action_answer_how
 
 slots:
   recipe:
@@ -53,12 +55,6 @@ responses:
 
   utter_commands:
   - text: "[1] Go over ingredients list or [2] Go over recipe steps."
-
-  utter_how:
-  - text: "No worries. I found a reference for you: https://www.youtube.com/results?search_query=how+to+preheat+oven"
-
-  utter_what:
-  - text: "No worries. I found a reference for you: https://www.google.com/search?q=what+is+a+pan"
 
 session_config:
   session_expiration_time: 60

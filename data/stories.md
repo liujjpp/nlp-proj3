@@ -54,11 +54,11 @@
   
 ## how question
 * how_question
-  - utter_how
+  - action_answer_how
   
 ## what question
 * what_question
-  - utter_what
+  - action_answer_what
   
 ## say hello
 * greet

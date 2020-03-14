@@ -8,14 +8,14 @@
 
 ## thanking path 1
 * gratitude
-  - utter_continue
+  - action_ask_continue
 * affirm
   - action_read_next_step
 > change_step
 
 ## thanking path 2
 * gratitude
-  - utter_continue
+  - action_ask_continue
 * deny
   - utter_question
   - utter_commands

@@ -28,6 +28,7 @@ actions:
   - action_read_next_step
   - action_read_prev_step
   - action_read_nth_step
+  - action_ask_continue
 
 slots:
   recipe:
@@ -52,12 +53,6 @@ responses:
 
   utter_commands:
   - text: "[1] Go over ingredients list or [2] Go over recipe steps."
-
-  utter_continue:
-  - text: "Should I continue to the 2nd step?"
-
-  utter_index:
-  - text: "Going to nth step: STUFF"
 
   utter_how:
   - text: "No worries. I found a reference for you: https://www.youtube.com/results?search_query=how+to+preheat+oven"

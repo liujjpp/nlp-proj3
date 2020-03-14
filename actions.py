@@ -141,6 +141,23 @@ class ActionReadPrevStep(Action):
             dispatcher.utter_message(text="The " + translate_number(idx+1) + " step is: " + steps[idx])
             return [SlotSet("current_step", idx)]
 
+class ActionAskContinue(Action):
+    def name(self) -> Text:
+        return "action_ask_continue"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        slots = tracker.current_slot_values()
+        if not slots['recipe']:
+            dispatcher.utter_message(text="Please input a valid recipe url first!")
+            return []
+        idx = slots['current_step'] + 1
+
+        dispatcher.utter_message(text="Should I continue to the " + translate_number(idx+1) + " step?")
+        return []
+
 class ActionReadNthStep(Action):
     def name(self) -> Text:
         return "action_read_nth_step"

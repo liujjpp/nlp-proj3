@@ -36,20 +36,20 @@
 
 ## prev step
 > change_step
-* prev_step{"number": "one"}
+* prev_step
   - action_read_prev_step
 > change_step
   
 ## next step
 > change_step
-* next_step{"number": "one"}
+* next_step
   - action_read_next_step
 > change_step
   
 ## index step
 > change_step
 * index_step
-  - utter_index
+  - action_read_nth_step
 > change_step
   
 ## how question

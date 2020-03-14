@@ -94,7 +94,12 @@ data/test/lookup_tables/number.txt
 - go back [one](number) step
 - back [one](number) step
 
+## regex:next_step
+- next
+
 ## intent:next_step
+- show next step
+- go to next step
 - go to the next step
 - [walk me through](guide_action) the next step
 - [walk me through](guide_action) next step
@@ -106,9 +111,14 @@ data/test/lookup_tables/count.txt
 
 ## intent:index_step
 - take me to the [1st](count) step
+- take me to the [2nd](count) step
+- take me to the [3rd](count) step
 - [walk me through](guide_action) the [1st](count) step
 - [walk me through](guide_action) [1st](count) step
 - [1st](count) step
+
+## regex:count
+- ^[a-zA-Z0-9]{1,}th$
 
 ## regex:how_question
 - how[^\\s]*

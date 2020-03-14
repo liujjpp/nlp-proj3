@@ -27,6 +27,7 @@ actions:
   - action_display_ingredients
   - action_read_next_step
   - action_read_prev_step
+  - action_read_nth_step
 
 slots:
   recipe:
@@ -35,12 +36,6 @@ slots:
   current_step:
     type: float
     initial_value: 0
-  number:
-    type: text
-    initial_value: "1"
-  count:
-    type: text
-    initial_value: "1st"
 
 responses:
   utter_greet:

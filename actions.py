@@ -21,6 +21,19 @@ str_number_lookup = {
     3: "3rd"
 }
 
+str_count_lookup = [
+    ['1st', 'first'],
+    ['2nd', 'second'],
+    ['3rd', 'third'],
+    ['4th', 'fourth'],
+    ['5th', 'fifth'],
+    ['6th', 'sixth'],
+    ['7th', 'seventh'],
+    ['8th', 'eighth'],
+    ['9th', 'ninth'],
+    ['10th', 'tenth']
+]
+
 def translate_number(num):
     if num < 4:
         return str_number_lookup[num]
@@ -127,3 +140,33 @@ class ActionReadPrevStep(Action):
         else:
             dispatcher.utter_message(text="The " + translate_number(idx+1) + " step is: " + steps[idx])
             return [SlotSet("current_step", idx)]
+
+class ActionReadNthStep(Action):
+    def name(self) -> Text:
+        return "action_read_nth_step"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        slots = tracker.current_slot_values()
+        print(tracker.latest_message['entities'])
+        if not slots['recipe']:
+            dispatcher.utter_message(text="Please input a valid recipe url before going over recipe steps.")
+            return []
+        try:
+            idx = slots['current_step'] + 1
+            steps = slots['recipe']['directions']
+            if len(tracker.latest_message['entities']) > 0:
+                nth_value = tracker.latest_message['entities'][0]['value'].lower()
+                # parse step from latest message
+                for i in range(len(str_count_lookup)):
+                    if nth_value in str_count_lookup[i]:
+                        idx = i
+                        break
+
+            dispatcher.utter_message(text="The " + translate_number(idx+1) + " step is: " + steps[idx])
+            return [SlotSet("current_step", idx)]
+        except:
+            dispatcher.utter_message(text="The nth step is out of range for this recipe. The recipe has a maximum of " + str(len(slots['recipe']['directions'])) + " steps.")
+            return []
